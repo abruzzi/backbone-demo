@@ -1,4 +1,4 @@
-### Maintainable JavaScript
+### Backbone Demo
 
 #### Setup
 If you have already got `node` & `npm` installed locally, goto step 2.
@@ -41,17 +41,3 @@ If you have already got `node` & `npm` installed locally, goto step 2.
 		./server.sh
 
 	open browser, go to [http://localhost:9999](http://localhost:9999)
-
-#### Working with location backend service
-
-1. Get all locations
-
-		http://location-backend-service.herokuapp.com/locations
-
-2. Filter locations by name
-
-		http://location-backend-service.herokuapp.com/locations?name=Melbourne
-
-	`name` is case insensitive, and could be partial.
-
-		http://location-backend-service.herokuapp.com/locations?name=mel
