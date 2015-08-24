@@ -15,12 +15,20 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'spec/**/*-spec.js'
+      'vendor/jquery/dist/jquery.js',
+      'vendor/underscore/underscore.js',
+      'vendor/backbone/backbone.js',
+      'vendor/jasmine-jquery/lib/jasmine-jquery.js',
+      'src/js/*.js',
+      'spec/helper.js',
+      'spec/**/*-spec.js',
+      {pattern: "spec/javascripts/fixtures/*.template", included: false}
     ],
 
 
     // list of files to exclude
     exclude: [
+      'src/js/app.js'
     ],
 
 

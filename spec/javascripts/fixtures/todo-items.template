@@ -1,0 +1,14 @@
+<script type="text/template" id="todo-items-template">
+  <div class="large-12 columns">
+      <h4>Todo Items</h4>
+      <% _.each(todos, function(todo) { %>
+        <div class="panel">
+          <h5><%= todo.description %></h5>
+          <a href="#" class="toggle  tiny right" data-id="<%= todo.id %>"><%= todo.status ? 'Done': 'Undo' %></a>
+        </div>
+      <% }); %>
+  </div>
+</script>
+
+<div class="row" id="todoItems">
+</div>
