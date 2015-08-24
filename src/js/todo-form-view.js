@@ -15,7 +15,7 @@ var TodoFormView = Backbone.View.extend({
 
     var item = $('#todoInput').val();
     var todos = this.model.get('todos');
-    todos.push({"description": item, "status": false});
+    todos.push({"id": _.uniqueId('todo_'), "description": item, "status": false});
     this.model.trigger('change:todos', todos);
   },
 
