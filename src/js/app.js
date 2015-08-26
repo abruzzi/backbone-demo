@@ -15,6 +15,6 @@ $(function() {
   var todoForm = new TodoFormView(model);
   var todoItems = new TodoItemsView(model);
 
-  todoForm.render();
-  todoItems.render();
+  $('#todoForm').append(todoForm.render());
+  $('#todoItems').append(todoItems.render());
 });

@@ -16,13 +16,15 @@ module.exports = Backbone.View.extend({
 
   toggleTodo: function(e) {
     e.preventDefault();
+
     var id = $(e.currentTarget).data('id');
     var todos = this.model.get('todos');
     var current = _.findWhere(todos, {"id": id});
+
     current.status = !current.status;
     this.model.trigger('change:todos', todos);
   },
-  
+
   render: function() {
     var html = template(this.model.toJSON());
     this.$el.html(html);
