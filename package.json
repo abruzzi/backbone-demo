@@ -15,6 +15,7 @@
     "jquery": "^2.1.4",
     "jshint-stylish": "^2.0.1",
     "karma": "^0.13.3",
+    "karma-browserify": "^4.3.0",
     "karma-chrome-launcher": "^0.2.0",
     "karma-jasmine": "^0.3.6",
     "lodash": "^3.10.1",
@@ -24,6 +25,10 @@
     "transform": [
       "hbsfy"
     ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abruzzi/backbone-demo.git"
   },
   "dependencies": {},
   "scripts": {

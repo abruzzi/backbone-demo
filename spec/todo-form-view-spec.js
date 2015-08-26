@@ -1,9 +1,14 @@
+var Backbone = require('backbone');
+var $ = require('jquery');
+
+var TodoFormView = require('../src/js/views/todo-form-view');
+var CustomMacthers = require('./custom-matchers');
+
 describe('TodoFormView', function(){
   'use strict';
 
   beforeEach(function() {
-    jasmine.getFixtures().fixturesPath = 'base/spec/javascripts/fixtures';
-    loadFixtures('todo-form.template');
+    jasmine.addMatchers(CustomMacthers);
   });
 
   it('#initialize', function(){
@@ -14,6 +19,7 @@ describe('TodoFormView', function(){
   it('#render', function() {
     var todoFormView = new TodoFormView(new Backbone.Model());
     var html = todoFormView.render();
+
     expect(html.find('#todoInput')).toExist();
     expect(html.find('#addButton')).toExist();
   });

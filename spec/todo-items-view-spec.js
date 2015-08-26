@@ -1,9 +1,14 @@
+var Backbone = require('backbone');
+var $ = require('jquery');
+
+var TodoItemsView = require('../src/js/views/todo-items-view');
+var CustomMacthers = require('./custom-matchers');
+
 describe('TodoItemsView', function(){
   'use strict';
 
   beforeEach(function() {
-    jasmine.getFixtures().fixturesPath = 'base/spec/javascripts/fixtures';
-    loadFixtures('todo-items.template');
+    jasmine.addMatchers(CustomMacthers);
   });
 
   it('#initialize', function(){

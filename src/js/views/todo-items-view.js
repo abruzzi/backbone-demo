@@ -22,9 +22,7 @@ module.exports = Backbone.View.extend({
     current.status = !current.status;
     this.model.trigger('change:todos', todos);
   },
-
-  el: '#todoItems',
-
+  
   render: function() {
     var html = template(this.model.toJSON());
     this.$el.html(html);

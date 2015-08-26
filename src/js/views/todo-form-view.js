@@ -13,12 +13,10 @@ module.exports = Backbone.View.extend({
     'click #addButton': 'addTodoItem'
   },
 
-  el: '#todoForm',
-
   addTodoItem: function(e) {
     e.preventDefault();
 
-    var item = $('#todoInput').val();
+    var item = this.$el.find('#todoInput').val();
     var todos = this.model.get('todos');
     todos.push({"id": _.uniqueId('todo_'), "description": item, "status": false});
 
