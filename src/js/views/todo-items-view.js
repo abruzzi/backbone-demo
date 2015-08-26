@@ -1,8 +1,13 @@
-var TodoItemsView = Backbone.View.extend({
+var Backbone = require('backbone');
+var _ = require('lodash');
+var $ = require('jquery');
+
+var template = require('../templates/todo-items.hbs');
+
+module.exports = Backbone.View.extend({
   initialize: function(model) {
     this.model = model;
     this.model.bind('change:todos', _.bind(this.render, this));
-    this.template = $('#todo-items-template').html();
   },
 
   events: {
@@ -21,9 +26,7 @@ var TodoItemsView = Backbone.View.extend({
   el: '#todoItems',
 
   render: function() {
-    var compiled = _.template(this.template);
-    var html = compiled(this.model.toJSON());
-
+    var html = template(this.model.toJSON());
     this.$el.html(html);
 
     return this.$el;

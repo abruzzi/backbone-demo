@@ -1,3 +1,9 @@
+var $ = require('jquery');
+
+var TodoItem = require('./models/todo-model');
+var TodoFormView = require('./views/todo-form-view');
+var TodoItemsView = require('./views/todo-items-view');
+
 $(function() {
   var data = [
     {"id": 1, "description": "再不杀人，就开学了", status: true},

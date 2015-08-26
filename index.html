@@ -7,27 +7,6 @@
         <link rel="stylesheet" href="src/css/foundation.css" title="" type="" />
         <link rel="stylesheet" href="src/css/style.css">
 
-        <script type="text/template" id="todo-form">
-          <div  class="large-9 medium-9 columns">
-            <input type="text" id="todoInput" value="" placeholder="Add a todo item"/>
-          </div>
-          <div  class="large-3 medium-3 columns">
-              <input type="button" class="submit button tiny" id="addButton" value="search" />
-          </div>
-        </script>
-
-        <script type="text/template" id="todo-items-template">
-          <div class="large-12 columns">
-              <h4>Todo Items</h4>
-              <% _.each(todos, function(todo) { %>
-                <div class="panel">
-                  <h5><%= todo.description %></h5>
-                  <a href="#" class="toggle  tiny right" data-id="<%= todo.id %>"><%= todo.status ? 'Done': 'Undo' %></a>
-                </div>
-              <% }); %>
-          </div>
-        </script>
-
         <title>Todos</title>
     </head>
     <body>
@@ -50,13 +29,6 @@
 
        </div>
 
-       <script type="text/javascript" src="vendor/jquery/dist/jquery.js"></script>
-       <script type="text/javascript" src="vendor/underscore/underscore.js"></script>
-       <script type="text/javascript" src="vendor/backbone/backbone.js"></script>
-
-       <script type="text/javascript" src="src/js/todo-model.js"></script>
-       <script type="text/javascript" src="src/js/todo-form-view.js"></script>
-       <script type="text/javascript" src="src/js/todo-items-view.js"></script>
-       <script type="text/javascript" src="src/js/app.js"></script>
+       <script type="text/javascript" src="build/js/bundle.js"></script>
     </body>
 </html>
