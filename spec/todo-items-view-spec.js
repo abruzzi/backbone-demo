@@ -17,15 +17,14 @@ describe('TodoItemsView', function(){
   });
 
   describe('#render', function() {
-    it('#render', function() {
+    it('no items', function() {
       var model = new Backbone.Model({todos: []});
       var todoItemsView = new TodoItemsView(model);
       var html = todoItemsView.render();
-      expect(html.find('h4')).toExist();
       expect(html.find('.panel')).not.toExist();
     });
 
-    it('#render', function() {
+    it('1 items', function() {
       var model = new Backbone.Model({todos: [
         {
           id: 1,
@@ -36,7 +35,6 @@ describe('TodoItemsView', function(){
 
       var todoItemsView = new TodoItemsView(model);
       var html = todoItemsView.render();
-      expect(html.find('h4')).toExist();
       expect(html.find('.panel')).toExist();
 
       var first = html.find('.panel').first();

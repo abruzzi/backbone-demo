@@ -3,13 +3,12 @@ var _ = require('lodash');
 var $ = require('jquery');
 
 var TodoItemView = require('./todo-item-view');
-var template = require('../templates/todo-items.hbs');
 
 module.exports = Backbone.View.extend({
   initialize: function(model) {
     this.model = model;
     this.views = [];
-    // this.model.bind('change:todos', _.bind(this.render, this));
+    this.model.bind('change:todos', _.bind(this.render, this));
   },
 
   createSubView: function(model) {
@@ -17,17 +16,13 @@ module.exports = Backbone.View.extend({
   },
 
   getDom: function (view) {
-  		return view.render().el;
+  		return view.render();
   },
 
   render: function() {
     var todos = this.model.get('todos');
-    this.views = todos.map(this.createSubView, this);
-    this.$el.append(_.map(this.views, this.getDom, this));
-
-    // console.log(result);
-    // var html = template(this.model.toJSON());
-    // this.$el.html(html);
+    this.views = _.map(todos, _.bind(this.createSubView, this));
+    this.$el.html(_.map(this.views, _.bind(this.getDom, this)));
 
     return this.$el;
   }
