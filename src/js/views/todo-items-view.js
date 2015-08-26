@@ -2,32 +2,32 @@ var Backbone = require('backbone');
 var _ = require('lodash');
 var $ = require('jquery');
 
+var TodoItemView = require('./todo-item-view');
 var template = require('../templates/todo-items.hbs');
 
 module.exports = Backbone.View.extend({
   initialize: function(model) {
     this.model = model;
-    this.model.bind('change:todos', _.bind(this.render, this));
+    this.views = [];
+    // this.model.bind('change:todos', _.bind(this.render, this));
   },
 
-  events: {
-    'click .toggle': 'toggleTodo'
+  createSubView: function(model) {
+    return new TodoItemView(new Backbone.Model(model));
   },
 
-  toggleTodo: function(e) {
-    e.preventDefault();
-
-    var id = $(e.currentTarget).data('id');
-    var todos = this.model.get('todos');
-    var current = _.findWhere(todos, {"id": id});
-
-    current.status = !current.status;
-    this.model.trigger('change:todos', todos);
+  getDom: function (view) {
+  		return view.render().el;
   },
 
   render: function() {
-    var html = template(this.model.toJSON());
-    this.$el.html(html);
+    var todos = this.model.get('todos');
+    this.views = todos.map(this.createSubView, this);
+    this.$el.append(_.map(this.views, this.getDom, this));
+
+    // console.log(result);
+    // var html = template(this.model.toJSON());
+    // this.$el.html(html);
 
     return this.$el;
   }
