@@ -24,3 +24,7 @@ gulp.task('browserify', function() {
 });
 
 gulp.task('default', ['js', 'test']);
+
+gulp.task('watch', function() {
+  gulp.watch('src/js/**/*', ['browserify']);
+});
