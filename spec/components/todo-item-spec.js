@@ -21,7 +21,7 @@ describe('TodoItem', function(){
     expect(h5.getDOMNode().textContent).toEqual('再不杀人，就开学了');
     expect(a.getDOMNode().textContent).toEqual('Undo');
 
-    React.addons.TestUtils.Simulate.click(a);
+    TestUtils.Simulate.click(a);
     expect(changeStatus).toHaveBeenCalled();
   });
 });

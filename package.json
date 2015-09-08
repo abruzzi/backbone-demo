@@ -23,6 +23,7 @@
     "react-tools": "^0.13.3",
     "reactify": "^1.1.1",
     "rewire": "^2.3.4",
+    "rewireify": "^0.2.2",
     "vinyl-source-stream": "^1.1.0"
   },
   "browserify": {

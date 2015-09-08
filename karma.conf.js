@@ -31,6 +31,9 @@ module.exports = function(config) {
         'spec/**/*-spec.js': ['browserify']
     },
 
+    browserify: {
+      transform: [ 'reactify', 'rewireify' ]
+    },
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
