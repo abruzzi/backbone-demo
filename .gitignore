@@ -3,4 +3,5 @@ vendor/
 build/
 demo-*.zip
 demo-*/
+publish
 .DS_store

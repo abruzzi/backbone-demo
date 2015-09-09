@@ -4,7 +4,12 @@ var gulp = require('gulp'),
     source = require('vinyl-source-stream'),
     KarmaServer = require('karma').Server,
     fs = require('fs'),
-    zip = require('gulp-zip');
+    zip = require('gulp-zip'),
+    htmlreplace = require('gulp-html-replace')
+    rev = require('gulp-rev')
+    del = require('del')
+    minifyCss = require('gulp-minify-css')
+    concat = require('gulp-concat');
 
 gulp.task('test', function(done){
   new KarmaServer({
@@ -39,10 +44,43 @@ function version() {
   return JSON.parse(fs.readFileSync('./package.json').toString()).version;
 }
 
-gulp.task('publish', ['js', 'test', 'browserify' ], function(){
-  var archiveName = 'demo-' + version() + '.zip';
+gulp.task('clean', function(){
+  return del([
+    'build',
+    'publish'
+  ]);
+});
 
-  return gulp.src(['build/**/*', 'index.html', 'server.sh'], {base: '.'})
-          .pipe(zip(archiveName))
-          .pipe(gulp.dest('.'));
+gulp.task('build', ['clean', 'publishCSS', 'publishJS'], function(){
+  var manifest = fs.readFileSync('publish/rev-manifest.json').toString();
+  var publishedJS = 'js/' + JSON.parse(manifest)['bundle.js']
+      publishedCSS = 'css/' + JSON.parse(manifest)['todo.css'];
+  return gulp.src(['index.html', 'server.sh'])
+      .pipe(htmlreplace({js: publishedJS, css: publishedCSS}))
+      .pipe(gulp.dest('publish'))
+});
+
+gulp.task('publishCSS', function(){
+  return gulp.src('src/css/**/*.css')
+      .pipe(minifyCss())
+      .pipe(concat('todo.css'))
+      .pipe(rev())
+      .pipe(gulp.dest('publish/css'))
+      .pipe(rev.manifest('publish/rev-manifest.json', {base: 'publish', merge: true}))
+      .pipe(gulp.dest('publish'));
+});
+
+gulp.task('publishJS', ['browserify'], function(){
+  return gulp.src('build/js/bundle.js')
+      .pipe(rev())
+      .pipe(gulp.dest('publish/js'))
+      .pipe(rev.manifest('publish/rev-manifest.json', {base: 'publish', merge: true}))
+      .pipe(gulp.dest('publish'));
+});
+
+gulp.task('publish', ['js', 'test', 'clean', 'browserify', 'publishCSS', 'publishJS', 'build'], function(){
+  var archiveName = 'demo-' + version() + '.zip';
+  return gulp.src('publish/**/*')
+      .pipe(zip(archiveName))
+      .pipe(gulp.dest('.'));
 });
