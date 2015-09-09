@@ -2,7 +2,9 @@ var gulp = require('gulp'),
     jshint = require('gulp-jshint'),
     browserify = require('browserify'),
     source = require('vinyl-source-stream'),
-    KarmaServer = require('karma').Server;
+    KarmaServer = require('karma').Server,
+    fs = require('fs'),
+    zip = require('gulp-zip');
 
 gulp.task('test', function(done){
   new KarmaServer({
@@ -31,4 +33,16 @@ gulp.task('default', ['js', 'test']);
 
 gulp.task('watch', function() {
   gulp.watch('src/js/**/*', ['browserify']);
+});
+
+function version() {
+  return JSON.parse(fs.readFileSync('./package.json').toString()).version;
+}
+
+gulp.task('publish', ['js', 'test', 'browserify' ], function(){
+  var archiveName = 'demo-' + version() + '.zip';
+
+  return gulp.src(['build/**/*', 'index.html', 'server.sh'], {base: '.'})
+          .pipe(zip(archiveName))
+          .pipe(gulp.dest('.'));
 });

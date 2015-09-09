@@ -9,6 +9,7 @@
     "browserify": "^11.0.1",
     "gulp": "^3.9.0",
     "gulp-jshint": "^1.11.2",
+    "gulp-zip": "^3.0.2",
     "handlebars": "^3.0.3",
     "hbsfy": "^2.2.1",
     "jasmine-core": "^2.3.4",
